@@ -1,9 +1,9 @@
 import { gql } from "apollo-server-express";
 
-const userMutation = gql`
+const schemaMutation = gql`
   type Mutation {
     createUser(data: CreateUserInput!): UserAuthPayload!
   }
 `;
 
-export { userMutation };
+export { schemaMutation }

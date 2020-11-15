@@ -1,10 +1,11 @@
 import { gql } from "apollo-server-express";
 
-const userQuery = gql`
+const schemaQuery = gql`
   type Query {
     users: [User!]!
     loginUser(data: LoginUserInput!): UserAuthPayload!
+    posts(query: String): [Post!]!
   }
 `;
 
-export { userQuery };
+export { schemaQuery };

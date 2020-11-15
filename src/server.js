@@ -1,17 +1,17 @@
-import {ApolloServer, gql, mergeSchemas} from "apollo-server-express";
+import {ApolloServer, mergeSchemas} from "apollo-server-express";
 import express from "express";
 import {createServer} from "http"
 import connectDB from "./config/connectDB";
 import resolvers from "./resolvers";
-import schemas from "./schemas";
+import {schema} from "./schema";
 const app = express();
 const PORT = process.env.PORT || 5000 ; 
-const schema = mergeSchemas({
-  schemas,
+const schemas = mergeSchemas({
+  schemas : [schema],
   resolvers
 })
 const server = new ApolloServer({
-  schema
+  schema : schemas
 })
 
 server.applyMiddleware({app})

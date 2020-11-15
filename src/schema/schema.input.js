@@ -1,6 +1,6 @@
 import { gql } from "apollo-server-express";
 
-const userInput = gql`
+const schemaInput = gql`
   input CreateUserInput {
     name: String!
     email: String!
@@ -12,4 +12,4 @@ const userInput = gql`
   }
 `;
 
-export { userInput };
+export { schemaInput };
