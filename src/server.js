@@ -1,17 +1,21 @@
-import {ApolloServer, mergeSchemas} from "apollo-server-express";
-import express from "express";
+import {ApolloServer, mergeSchemas, PubSub} from "apollo-server-express";
+import express, { urlencoded } from "express";
 import {createServer} from "http"
 import connectDB from "./config/connectDB";
 import resolvers from "./resolvers";
 import {schema} from "./schema";
 const app = express();
+
+app.use(express.urlencoded({extended : true }))
+app.use(express.json());
 const PORT = process.env.PORT || 5000 ; 
 const schemas = mergeSchemas({
   schemas : [schema],
   resolvers
 })
 const server = new ApolloServer({
-  schema : schemas
+  schema : schemas,
+  context : ({req}) => ({req})
 })
 
 server.applyMiddleware({app})

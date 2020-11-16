@@ -10,6 +10,16 @@ const schemaInput = gql`
     email: String!
     password: String!
   }
+  input PostInputCreate {
+    title: String!
+    content: String!
+    status: String
+  }
+  input PostInputUpdate {
+    title: String
+    content: String
+    status: String
+  }
 `;
 
 export { schemaInput };

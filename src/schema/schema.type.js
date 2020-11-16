@@ -5,7 +5,7 @@ const schemaType = gql`
     _id: ID!
     name: String!
     email: String!
-    password: String!
+    password: String
     posts: [Post!]!
     createdAt: String
     updatedAt: String
@@ -22,6 +22,10 @@ const schemaType = gql`
   type UserAuthPayload {
     user: User!
     token: String!
+  }
+  type PostSubscriptionPayload {
+    mutation: MutationType!
+    node: Post!
   }
 `;
 

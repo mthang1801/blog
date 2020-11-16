@@ -2,6 +2,7 @@ import {User} from "./user.model";
 import {ValidationError, UserInputError} from "apollo-server-express"
 import bcrypt from "bcryptjs";
 import {generateToken} from "../utils/token"
+import getAuthUser from "../utils/getAuthUser";
 const userController = {
   users : (root , args) => User.find(),
   findOrCreateUser : async (data) => {
@@ -37,6 +38,16 @@ const userController = {
       user, 
       token : generateToken(user._id)
     }
+  },
+  hidePassword : () => {
+    return "***"; 
+  },
+  emailLimiter : (root, req) => {
+    const userId = getAuthUser(req,false);
+    if(userId && userId == root._id){
+      return root.email ; 
+    }
+    return "***"
   }
 }
 

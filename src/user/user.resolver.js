@@ -12,6 +12,14 @@ const userResolver = {
     createUser : (root ,args, ctx, info) => {            
       return userController.findOrCreateUser(args.data)
     }
+  },
+  User : {
+    password :  (root ,args, ctx, info) => {
+      return userController.hidePassword()
+    }, 
+    email : (root ,args, {req}, info) => {
+      return userController.emailLimiter(root, req)
+    }
   }
 };
 

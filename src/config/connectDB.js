@@ -7,7 +7,7 @@ const connectDB = () => {
   const user = process.env.DB_USER ; 
   const password = process.env.DB_PASSWORD ; 
   const uri = `mongodb://${host}:${port}/${database}`
-  return mongoose.connect(uri, {useUnifiedTopology : true , useCreateIndex : true })
+  return mongoose.connect(uri, {useUnifiedTopology : true , useCreateIndex : true, useNewUrlParser: true })
 }
 
 export default connectDB

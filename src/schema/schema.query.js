@@ -4,7 +4,7 @@ const schemaQuery = gql`
   type Query {
     users: [User!]!
     loginUser(data: LoginUserInput!): UserAuthPayload!
-    posts(query: String): [Post!]!
+    posts(query: String): [Post!]!    
   }
 `;
 

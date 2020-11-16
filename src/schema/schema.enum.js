@@ -5,6 +5,11 @@ const schemaEnum = gql`
     public
     private
   }
+  enum MutationType {
+    CREATED
+    UPDATED
+    DELETED
+  }
 `;
 
 export { schemaEnum };
