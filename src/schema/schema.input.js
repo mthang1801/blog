@@ -20,6 +20,9 @@ const schemaInput = gql`
     content: String
     status: String
   }
+  input CreateCommentInput{
+    content : String!
+  }
 `;
 
 export { schemaInput };

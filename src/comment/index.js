@@ -1,0 +1,1 @@
+export {commentResolver} from "./comment.resolver"

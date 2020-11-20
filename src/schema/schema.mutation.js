@@ -5,6 +5,8 @@ const schemaMutation = gql`
     createUser(data: CreateUserInput!): UserAuthPayload!
     createPost(data: PostInputCreate!): Post!
     updatePost(postId: ID!, data: PostInputUpdate!): Post!
+    deletePost(postId: ID!) : Post! 
+    createComment(postId: ID!, data : CreateCommentInput!) : Comment! 
   }
 `;
 

@@ -15,10 +15,15 @@ const PostSchema = new mongoose.Schema(
       ref: "users",
       required: true,
     },
+    comments : [{
+      type : mongoose.Schema.Types.ObjectId, 
+      ref : "comments",
+      required : true 
+    }],
     status: {
       type: String,
       enum: ["public", "private"],
-      required: true,
+      default : "public"
     },
   },
   { timestamps: true }

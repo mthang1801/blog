@@ -27,6 +27,14 @@ const postResolver = {
         SubscriptionActions.POST_UPDATED
       );
     },
+    deletePost : (root, args, {req}, info) => {
+      return postController.deletePost(
+        args.postId, 
+        req,
+        pubsub, 
+        SubscriptionActions.POST_DELETED
+      )
+    }
   },
   Subscription: {
     createPost: {
@@ -39,6 +47,12 @@ const postResolver = {
       subscribe: withFilter(
         () => pubsub.asyncIterator(SubscriptionActions.POST_UPDATED),
         (payload, args) => payload.updatePost.node._id == args.postId
+      ),
+    },
+    deletePost: {
+      subscribe: withFilter(
+        () => pubsub.asyncIterator(SubscriptionActions.POST_DELETED),
+        (payload, args) => payload.deletePost.node._id == args.postId
       ),
     },
   },

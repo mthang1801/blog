@@ -1,5 +1,6 @@
 import { userResolver } from "../user";
 import { postResolver } from "../post";
-const resolvers = [userResolver, postResolver];
+import { commentResolver } from "../comment"
+const resolvers = [userResolver, postResolver, commentResolver];
 
 export default resolvers;

@@ -1,5 +1,5 @@
-import {ApolloServer, mergeSchemas, PubSub} from "apollo-server-express";
-import express, { urlencoded } from "express";
+import {ApolloServer, mergeSchemas} from "apollo-server-express";
+import express from "express";
 import {createServer} from "http"
 import connectDB from "./config/connectDB";
 import resolvers from "./resolvers";

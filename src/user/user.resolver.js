@@ -17,9 +17,9 @@ const userResolver = {
     password :  (root ,args, ctx, info) => {
       return userController.hidePassword()
     }, 
-    email : (root ,args, {req}, info) => {
-      return userController.emailLimiter(root, req)
-    }
+    // email : (root ,args, {req}, info) => {      
+    //   return userController.emailLimiter(root, req)
+    // }
   }
 };
 
