@@ -24,8 +24,8 @@ const schemaType = gql`
   type Comment {
     _id : ID! 
     content : String!
-    author : ID! 
-    post : ID! 
+    author : User! 
+    post : Post!
     createdAt : String! 
     updatedAt : String! 
   }
@@ -40,7 +40,7 @@ const schemaType = gql`
   type CommentSubscriptionPayload {
     mutation: MutationType!
     node: Comment!
-  }
+  }  
 `;
 
 export { schemaType };

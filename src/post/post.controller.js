@@ -1,7 +1,7 @@
 import { Post } from "./post.model";
 import { User } from "../user/user.model";
 import getAuthUser from "../utils/getAuthUser";
-import { CheckResultAndHandleErrors, ValidationError } from "apollo-server-express";
+import { CheckResultAndHandleErrors, ValidationError, ForbiddenError} from "apollo-server-express";
 // import mongoose to use transaction 
 import mongoose  from "mongoose";
 const postController = {
@@ -32,7 +32,7 @@ const postController = {
     await user.save();
     await session.commitTransaction()    
     pubsub.publish(connectionParam, {
-      createPost: {
+      postActions: {
         mutation: "CREATED",
         node: newPost,
       },
@@ -46,9 +46,12 @@ const postController = {
       throw new CheckResultAndHandleErrors("Data was empty");
     }
     const userId = getAuthUser(req);
-    const post = await Post.findById(postId);
+    const post = await Post.findById(postId).populate("author");
     if (!post) {
       throw new CheckResultAndHandleErrors("Post not found");
+    }
+    if(post.author._id.toString() !== userId){
+      throw new ForbiddenError("Post isn't not allowed to update")
     }
     if (title) {
       post.title = title;
@@ -61,7 +64,7 @@ const postController = {
     }
     await post.save();
     pubsub.publish(connectionParam, {
-      updatePost: {
+      postActions: {
         mutation: "UPDATED",
         node: post,
       },
@@ -79,7 +82,7 @@ const postController = {
     }
    
     pubsub.publish(connectionParam, {
-      deletePost: {
+      postActions: {
         mutation: "DELETED",
         node: post,
       },

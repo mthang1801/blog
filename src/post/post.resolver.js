@@ -15,7 +15,7 @@ const postResolver = {
         args.data,
         req,
         pubsub,
-        SubscriptionActions.POST_CREATED
+        SubscriptionActions.POST_ACTIONS
       );
     },
     updatePost: (root, args, { req }, info) => {
@@ -24,7 +24,7 @@ const postResolver = {
         args.data,
         req,
         pubsub,
-        SubscriptionActions.POST_UPDATED
+        SubscriptionActions.POST_ACTIONS
       );
     },
     deletePost : (root, args, {req}, info) => {
@@ -32,29 +32,20 @@ const postResolver = {
         args.postId, 
         req,
         pubsub, 
-        SubscriptionActions.POST_DELETED
+        SubscriptionActions.POST_ACTIONS
       )
     }
   },
   Subscription: {
-    createPost: {
+    postActions: {
       subscribe: withFilter(
-        () => pubsub.asyncIterator(SubscriptionActions.POST_CREATED),
-        (payload, args) => payload.createPost.node.author._id == args.userId
+        () => pubsub.asyncIterator(SubscriptionActions.POST_ACTIONS),
+        (payload, args) => {
+          console.log(payload)
+          return payload.postActions.node.author._id == args.userId
+        }
       )
-    },
-    updatePost: {
-      subscribe: withFilter(
-        () => pubsub.asyncIterator(SubscriptionActions.POST_UPDATED),
-        (payload, args) => payload.updatePost.node._id == args.postId
-      ),
-    },
-    deletePost: {
-      subscribe: withFilter(
-        () => pubsub.asyncIterator(SubscriptionActions.POST_DELETED),
-        (payload, args) => payload.deletePost.node._id == args.postId
-      ),
-    },
+    },    
   },
 };
 

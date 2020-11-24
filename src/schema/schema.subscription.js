@@ -2,18 +2,14 @@ import { gql } from "apollo-server-express";
 
 const schemaSubscription = gql`
   type Subscription {
-    createPost(userId: ID!): PostSubscriptionPayload
-    updatePost(postId: ID!): PostSubscriptionPayload
-    deletePost(postId: ID!): PostSubscriptionPayload
-    createComment(postId: ID!) : CommentSubscriptionPayload
+    postActions(userId: ID!): PostSubscriptionPayload   
+    commentActions(postId: ID!): CommentSubscriptionPayload    
   }
 `;
 
 const SubscriptionActions = {
-  POST_CREATED: "POST_CREATED",
-  POST_UPDATED: "POST_UPDATED",
-  POST_DELETED: "POST_DELETED",
-  COMMENT_CREATED : "COMMENT_CREATED"
+  POST_ACTIONS: "POST_ACTIONS",
+  COMMENT_ACTIONS : "COMMENT_ACTIONS",  
 };
 export { SubscriptionActions };
 export { schemaSubscription };

@@ -10,17 +10,38 @@ const commentResolver = {
         args.data,
         req,
         pubsub,
-        SubscriptionActions.COMMENT_CREATED
+        SubscriptionActions.COMMENT_ACTIONS
       );
     },
+    updateComment : (root, args, {req}, info) => {
+      return commentController.updateComment(        
+        args.commentId, 
+        args.data, 
+        req, 
+        pubsub, 
+        SubscriptionActions.COMMENT_ACTIONS
+      )
+    },
+    deleteComment : (root, args, {req} , info ) => {
+      return commentController.deleteComment(
+        args.commentId,
+        req, 
+        pubsub,
+        SubscriptionActions.COMMENT_ACTIONS
+      )
+    }
   },
   Subscription: {
-    createComment: {
+    commentActions: {
       subscribe: withFilter(
-        () => pubsub.asyncIterator(SubscriptionActions.COMMENT_CREATED),
-        (payload, args) => payload.createComment.node.post == args.postId
+        () => pubsub.asyncIterator(SubscriptionActions.COMMENT_ACTIONS),
+        (payload, args) =>{
+          console.log(payload)
+          return payload.commentActions.node.post._id == args.postId
+        }
+        
       ),
-    },
+    },    
   },
 };
 
