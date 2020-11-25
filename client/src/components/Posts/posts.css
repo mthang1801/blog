@@ -1,0 +1,47 @@
+.container{
+  width : 90% ;
+  margin: auto;
+}
+
+
+.table{
+  width : 95% ;
+  max-width : 1200px;
+  display : flex ; 
+  flex-direction : column ;   
+  margin : auto;
+}
+
+.table-heading{
+  width : 100% ;
+  display : flex ;
+  justify-content: space-between;
+  background-color : lightblue;
+}
+
+.table-heading > * {
+  width : 25%;
+  text-align:center;
+  font-weight : bold ;  
+}
+
+.table-body{
+  width : 100% ;
+}
+
+.table-body > *:nth-child(even){
+  background-color : lightgreen;
+}
+.table-body > *:nth-child(odd){
+  background-color: lightgray;
+}
+
+.row {
+  display : flex ; 
+  justify-content: space-between;
+}
+
+.row > * {
+  width : 25%;
+  overflow: hidden;
+}
