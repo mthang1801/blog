@@ -5,7 +5,7 @@ import { pubsub } from "../pubsub";
 
 const postResolver = {
   Query: {
-    posts: (root, args, ctx, info) => {
+    posts: (root, args, {req}, info) => {     
       return postController.posts(args.query);
     },
   },

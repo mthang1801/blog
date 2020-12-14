@@ -11,7 +11,7 @@ const postController = {
         title: new RegExp(`${query}`, "i"),
         status: "public",
       }).populate("author");
-    }
+    }    
     return Post.find({ status: "public" }).populate("author");
   },
   createPost: async (data, req, pubsub, connectionParam) => {

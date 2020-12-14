@@ -1,0 +1,30 @@
+.postCard{
+  padding :1.5rem 2rem;
+  border : 1px solid black;
+  margin : 1rem auto;
+  box-shadow: var(--lightShadow);
+  border-radius: 5px;
+  line-height: 1.7;
+  transition: var(--mainTransition);
+  cursor : pointer; 
+  &:hover{
+    transform: translateY(-3px);
+    box-shadow: var(--darkShadow);
+    background-color: var(--mainBlack);
+    color : var(--mainWhite);
+  }
+}
+
+h2{
+  font-size: 1.4em;
+  font-weight: bold;
+  text-transform: capitalize;
+ 
+}
+.date{
+  display : inline-block;
+  font-size : 1rem;
+  margin-left: 2rem;
+  color : var(--darkGrey);
+}
+

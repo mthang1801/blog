@@ -6,9 +6,10 @@ import {
   SubTitle,
   FormGroups,
   ButtonGroups
-} from "./auth.styles";
-import CustomInput from "../UI/custom-input/custom-input.component";
+} from "../auth.styles";
+import CustomInput from "../../UI/custom-input/custom-input.component";
 import {Button} from "@material-ui/core"
+import Spinner from "../../spinner/spinner.component"
 const INITIAL_STATE = {
   controls: {
     name: {
@@ -69,7 +70,10 @@ const INITIAL_STATE = {
   formIsValid: false,
   loaded: false,
   disabled: true,
+  loading : false 
 };
+
+
 class Signup extends React.Component {
   state = { ...INITIAL_STATE };
   checkValidity = (value, rules) => {
@@ -129,18 +133,34 @@ class Signup extends React.Component {
     this.setState({ controls: updatedControls, formIsValid });
   };
 
-  handleSubmit = (e) => {
-   
+  handleSubmit = async (e) => {   
+    this.setState({loading : true}) 
     e.preventDefault()
-    const {name, email: value, password : value} = this.state.controls
     
-   
+    let {name, email , password} = this.state.controls 
+    name = name.value ;
+    email = email.value ;
+    password = password.value ; 
+    try{
+      const {data : {createUser : {token}}} = await this.props.createUser({variables : {data : {
+        name,
+        email,
+        password
+      }}})
+      localStorage.setItem("token", token)
+      localStorage.setItem("expireDate", new Date(Date.now() + 60*60*1000))
+    }catch(err){
+      console.log(err)
+    }
+    
   }
   render() {
     const { formIsValid , disabled} = this.state;
     const keysFormInput = Object.keys(this.state.controls).map(
       (key) => this.state.controls[key]
     );      
+    if(this.state.loading)
+      return <Spinner/>
     return (
       <FormContainer onSubmit={this.handleSubmit}>
         <FormHeader>

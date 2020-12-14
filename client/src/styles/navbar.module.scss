@@ -1,0 +1,102 @@
+
+.navHeader{
+  display : flex ; 
+  justify-content: space-between;
+  padding : 1rem;
+}
+
+.toggleBtn{
+  border : none ;
+  background-color : transparent;
+  outline : none ;
+  &:hover{
+    cursor : pointer;
+  }  
+}
+
+
+.logoImage{
+  height : 4rem ;
+  width : 4rem;
+}
+
+.logoIcon{
+  color : var(--primaryColor);
+  font-size : 1.7em;
+}
+.navLinks{
+  list-style-type: none;  
+  height : 0 ;
+  transition: var(--mainTransition);
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.showNav{
+  height : 216px;
+}
+
+
+.navLinks a {
+  display : block ;
+  padding : 1rem 1.25rem ;
+  text-decoration: none ;
+  text-transform: capitalize;
+  color : var(--mainBlack);
+  transition: var(--mainTransition);
+  font-weight: bold ;
+  letter-spacing: var(--mainSpacing);
+  &:hover{
+    color : var(--primaryColor);
+  }
+}
+
+.navSocialLinks{
+  display : none ;
+}
+
+@media screen and (min-width: 992px){
+  .toggleBtn{
+    display : none ;
+  }
+  .navLinks{
+    height : auto;
+    display : flex;
+  }
+  .navbar{
+    max-width : 1180px;
+    margin : 0 auto;
+    display : flex ; 
+    justify-content: space-between;
+    align-items: center;   
+    flex-wrap: nowrap;
+  }
+  .navLinks {
+    display : flex ; 
+    justify-content: center;   
+    align-items: center;
+  }
+  .navSocialLinks{
+    display : flex ; 
+    line-height: 0;   
+  }
+  
+  .navSocialLinks a{
+    display : block;    
+    text-decoration: none ;
+    margin : 0 0.5rem;
+    font-size : 1.5em;
+    color : var(--primaryColor);
+    transition: var(--mainTransition);
+    &:hover{
+      color : var(--mainBlack);
+      transform: translateY(-5px);
+    }
+  }  
+}
+
+@media screen and (max-width: 576px){
+  .navbar{
+    padding : 0 1.5rem;
+  }
+}
